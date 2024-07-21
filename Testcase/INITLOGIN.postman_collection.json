@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "aea4c56f-b1f0-46ae-b29d-7ecb4e5a01bd",
+		"name": "INITLOGIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34240706"
+	},
+	"item": [
+		{
+			"name": "Init Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// @allure.label.suite=postman-new-api-testing-demo\r",
+							"// @allure.label.story=\"Verify-the-get-api-return-correct-data\"\r",
+							"// @allure.label.owner=\"naodeng\"\r",
+							"// @allure.label.tag=\"GETAPI\"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"timeZone\",jsonData.time);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body data\", function () {\r",
+							"    pm.expect(jsonData.data);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body data2\", function () {\r",
+							"    pm.expect(jsonData.auth);\r",
+							"    pm.expect(jsonData.data);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email\": \"{{email}}\",\r\n\"password\": \"{{password}}\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/gw/v1/game/{{campaignId}}/init",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"gw",
+						"v1",
+						"game",
+						"{{campaignId}}",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckLogin Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"accessToken\",jsonData.accessToken);\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"login\": \"{{email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/v1/game/{{campaignId}}/check-login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"v1",
+						"game",
+						"{{campaignId}}",
+						"check-login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConfirmCode Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"code\": \"{{password}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-prod.hezzl.com/auth/v1/game/145602/confirm-code",
+					"protocol": "https",
+					"host": [
+						"api-prod",
+						"hezzl",
+						"com"
+					],
+					"path": [
+						"auth",
+						"v1",
+						"game",
+						"145602",
+						"confirm-code"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

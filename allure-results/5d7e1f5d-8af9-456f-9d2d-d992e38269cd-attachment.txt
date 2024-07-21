@@ -1,0 +1,18 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+var jsonData = pm.response.json();
+pm.environment.set("timeZone",jsonData.time);
+
+
+pm.test("Body data", function () {
+    pm.expect(jsonData.data);
+});
+
+pm.test("Body data2", function () {
+    pm.expect(jsonData.auth);
+    pm.expect(jsonData.data);
+});
+
+

@@ -1,0 +1,18 @@
+{
+    "name": "postman-newman-demo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "newman run Testcase/INITLOGIN.postman_collection.json -e Env/HezzlEnv.postman_environment.json -r cli,allure --reporter-allure-export ./allure-results"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "allure-commandline": "^2.24.1",
+      "newman": "^5.1.2",
+      "newman-reporter-allure": "^2.9.2",
+      "newman-reporter-htmlextra": "^1.22.11"
+    }
+  }

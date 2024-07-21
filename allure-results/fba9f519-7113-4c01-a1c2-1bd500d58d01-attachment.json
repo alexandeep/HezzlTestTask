@@ -1,0 +1,12 @@
+{
+    "Content-Type": "application/json",
+    "Authorization": "string",
+    "User-Agent": "PostmanRuntime/7.39.0",
+    "Accept": "*/*",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "50328fe3-2b09-49ec-b277-f7e56b3db74e",
+    "Host": "api-prod.hezzl.com",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Content-Length": "24"
+}
